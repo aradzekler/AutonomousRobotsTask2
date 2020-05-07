@@ -1,4 +1,4 @@
-public class Bereshit {
+public class Beresheet {
 
 	public static final double MAIN_ENGINE_THRUST = 430;   // in Newtons.
 	public static final double AUX_ENGINE_THRUST = 25;    // in Newtons.
@@ -10,6 +10,7 @@ public class Bereshit {
 	public static final double SPACECRAFT_RADIUS = 1.144; // in meters.
 	final private double dt = 1; // delta-time (change in time in seconds).
 	private int currAlt = 30000; // in km.
+	private double batteryLife = 100.0; // battery in %.
 	private int currAngle = 0;
 	private int currTime = 0;
 	private double angularSpeed = 0.0;
@@ -124,8 +125,7 @@ public class Bereshit {
 	}
 
 	private void engineTurnoff() {
-		this.xAccel = 0;
-
+		this.xAccel = 0; // no other forces working on our spacecraft except engines.
 		double weight = getWeight();
 		double gravity = Moon.getNewtonMoonGravity(weight, this.currAlt);
 		this.yAccel = Moon.getNewtonAcceleration(gravity, weight); // calculate gravitational acceleration, i.e freefall.
