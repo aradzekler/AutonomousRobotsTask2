@@ -9,9 +9,9 @@ public class Beresheet {
 	public static final double SPACECRAFT_DIAMETER = 2.288; // in meters.
 	public static final double SPACECRAFT_RADIUS = 1.144; // in meters.
 	final private double dt = 1; // delta-time (change in time in seconds).
-	private int currAlt = 30000; // in km.
+	private double currAlt = 30000; // in km.
 	private double batteryLife = 100.0; // battery in %.
-	private int currAngle = 0;
+	private double currAngle = 90;
 	private int currTime = 0;
 	private double angularSpeed = 0.0;
 	private double angularAcceleration = 0.0;
@@ -136,7 +136,7 @@ public class Beresheet {
 	public void landingAction() {
 		while (this.currAlt > 0 && this.fuelMass > 0) { // continue while can.
 			currTime += dt; // simulation time loops of 1 sec.
-
+			System.out.println(this.toString());
 			engineTurnoff();
 			activateEngines();
 			rotateCraft();
@@ -164,6 +164,24 @@ public class Beresheet {
 		}
 
 
+	}
+
+
+	@Override
+	public String toString() {
+		return String.format("%4ds\t%,9.2f\t%5.2fm/s\t%5.2fm/s²\t%7.2fm/s\t%5.2fm/s²\t%.2f\t%.2f\t%5.2f°\t%5.2f\t%6.3f",
+				currTime,
+				currAlt,
+				ySpeed,
+				yAccel,
+				xSpeed,
+				xAccel,
+				fuelMass,
+				getWeight(),
+				currAngle,
+				angularSpeed,
+				angularAcceleration
+		);
 	}
 
 

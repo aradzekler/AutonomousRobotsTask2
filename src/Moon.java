@@ -15,7 +15,7 @@ public class Moon {
 
 	// simply multiple current acceleration with delta.
 	public static double getCurrAcc(double dt, double acc) {
-		return acc * dt;
+		return dt * acc;
 	}
 
 
